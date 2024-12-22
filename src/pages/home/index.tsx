@@ -15,6 +15,7 @@ export const App = () => {
   const [filters, setFilters] = useState({
     location: '',
     area: '',
+    searchTerm: '',
   });
   const loader = useRef(null);
 
@@ -29,7 +30,9 @@ export const App = () => {
   const filteredData = itemDataList.filter((item) => {
     return (
       (filters.location === '' || item.location === filters.location) &&
-      (filters.area === '' || item.area === filters.area)
+      (filters.area === '' || item.area === filters.area) &&
+      // 검색어 필터 추가 (대소문자 구분 없이)
+      (filters.searchTerm === '' || (item.title + '').includes(filters.searchTerm))
     );
   });
 
@@ -69,15 +72,12 @@ export const App = () => {
     });
   };
 
-  const getUniqueValues = (key) => {
-    return Array.from(new Set(itemDataList.map((item) => item[key]))).filter(Boolean);
-  };
   return (
     <>
       <DetailBottomSheet open={open} item={detailItem} close={() => setOpen(false)} />
       <FilterContainer>
         <select name="area" value={filters.area} onChange={handleFilterChange}>
-          <option value="">Select Area</option>
+          <option value="">전체</option>
           <option value={'서울'}>서울</option>
           <option value={'경기/인천'}>경기도 / 인천</option>
           <option value={'충청'}>충청도</option>
@@ -86,16 +86,15 @@ export const App = () => {
           <option value={'강원'}>강원</option>
           <option value={'제주'}>제주</option>
         </select>
-
-        <select name="location" value={filters.location} onChange={handleFilterChange}>
-          <option value="">Select Location</option>
-          {getUniqueValues('location').map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
+        <SearchInput
+          type="text"
+          placeholder="테마 검색..."
+          name="searchTerm"
+          value={filters.searchTerm}
+          onChange={handleFilterChange}
+        />
       </FilterContainer>
+      {filteredData.length === 0 && <NoResults>검색 결과가 없습니다.</NoResults>}
 
       <Wrap>
         <Inner>
@@ -115,6 +114,26 @@ export const App = () => {
     </>
   );
 };
+const NoResults = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: #666;
+`;
+
+const SearchInput = styled.input`
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 200px;
+  &::placeholder {
+    color: #999;
+  }
+  &:focus {
+    outline: none;
+    border-color: #666;
+  }
+`;
 
 const LoaderDiv = styled.div`
   height: 20px;

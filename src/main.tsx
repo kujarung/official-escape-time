@@ -3,6 +3,7 @@ import { App } from './pages/home';
 import { Routes, Route, HashRouter } from 'react-router';
 import { Details } from './pages/details';
 import { createGlobalStyle } from 'styled-components';
+import { CommonModal } from './components/common/CommonModal';
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -13,11 +14,14 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 createRoot(document.getElementById('root')!).render(
-  <HashRouter>
-    <GlobalStyle />
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/details/:id" element={<Details />} />
-    </Routes>
-  </HashRouter>
+  <>
+    <CommonModal />
+    <HashRouter>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/details/:id" element={<Details />} />
+      </Routes>
+    </HashRouter>
+  </>
 );

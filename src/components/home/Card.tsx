@@ -79,7 +79,6 @@ const TextContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  font-family: Tenada;
   color: black;
   text-align: center;
   text-decoration: none;

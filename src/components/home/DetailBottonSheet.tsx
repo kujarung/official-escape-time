@@ -2,7 +2,8 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import { ITEM_TYPE } from '../../type';
 import 'react-spring-bottom-sheet/dist/style.css';
 import styled from 'styled-components';
-import { useShareTheme } from '../../hook/use-shared-theme';
+import { Link } from 'react-router';
+import { useModalStore } from '../../store/modal-store';
 
 export const DetailBottomSheet = ({
   open,
@@ -13,7 +14,8 @@ export const DetailBottomSheet = ({
   item: ITEM_TYPE | undefined;
   close: () => void;
 }) => {
-  const { shareToKakao } = useShareTheme();
+  const { setIsVisible, setSelectedId } = useModalStore();
+
   if (!item) return <></>;
   return (
     <BottomSheet
@@ -25,20 +27,40 @@ export const DetailBottomSheet = ({
       snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight]}
     >
       <ItemInner>
-        <h2>{item.title}</h2>
-        <ItemImg src={`/official-escape-time/assets/theme-img/thumb_${item.id}.jpg`} alt="" />
-        <h2>{item.description}</h2>
-        <ButtonContainer onClick={() => shareToKakao(item.id)}>
-          <KakaoSharedButton>공유하기</KakaoSharedButton>
+        <Inner>
+          <ItemImg src={`/official-escape-time/assets/theme-img/thumb_${item.id}.jpg`} alt="" />
+          <Desc>
+            <Title>{item.title}</Title>
+            <h2>{item.description}</h2>
+          </Desc>
+        </Inner>
+
+        <ButtonContainer>
+          <KakaoSharedButton
+            onClick={() => {
+              close();
+              setSelectedId(item.id);
+              setIsVisible(true);
+            }}
+          >
+            공유하기
+          </KakaoSharedButton>
+          <DetailButton to={`/details/${item.id}`}>자세히 보기</DetailButton>
         </ButtonContainer>
       </ItemInner>
     </BottomSheet>
   );
 };
 
+const Title = styled.h2`
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 10px;
+`;
+
 const ButtonContainer = styled.div`
   position: fixed;
-  bottom: 0;
+  bottom: 20px;
 `;
 
 const KakaoSharedButton = styled.button`
@@ -47,18 +69,30 @@ const KakaoSharedButton = styled.button`
   border: none;
 `;
 
+const DetailButton = styled(Link)``;
+
 const ItemInner = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
   position: relative;
-  padding-bottom: 50px;
+  padding-bottom: 70px;
   flex-direction: column;
 `;
 
+const Inner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Desc = styled.div``;
+
 const ItemImg = styled.img`
-  height: 150px;
+  height: 200px;
   border-radius: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
 `;

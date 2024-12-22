@@ -14,6 +14,7 @@
     "deploy": "gh-pages -d dist -t true"
   },
   "dependencies": {
+    "antd": "^5.22.5",
     "dayjs": "^1.11.13",
     "gh-pages": "^6.2.0",
     "react": "^18.3.1",
@@ -24,7 +25,8 @@
     "react-spring-bottom-sheet": "^3.4.1",
     "styled-components": "^6.1.13",
     "swiper": "^11.1.15",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
