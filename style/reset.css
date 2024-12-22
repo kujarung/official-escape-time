@@ -125,7 +125,8 @@ table {
 
 html,
 body {
-  background-color: #faedcd;
+  background-color: rgb(245, 245, 247);
+  font-family: Tenada;
 }
 
 [data-rsbs-is-dismissable='false'] [data-rsbs-backdrop] {
@@ -134,4 +135,14 @@ body {
 
 [data-rsbs-has-header='false'] [data-rsbs-header] {
   display: none !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
 }
