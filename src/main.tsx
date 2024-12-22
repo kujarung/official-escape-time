@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './pages/home';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { Routes, Route, HashRouter } from 'react-router';
 import { Details } from './pages/details';
 import { createGlobalStyle } from 'styled-components';
 
@@ -13,11 +13,11 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename={'/official-escape-time'}>
+  <HashRouter>
     <GlobalStyle />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/details/:id" element={<Details />} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 );

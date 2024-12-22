@@ -9,7 +9,7 @@ export const Card = ({ item, onClick }: { item: ITEM_TYPE; onClick: () => void }
   };
 
   return (
-    <CardWrap key={item.id} to={`/details/${item.id}`} onClick={onClick}>
+    <CardWrap key={item.id} onClick={onClick}>
       <ImageWrapper>
         <LazyLoadImage
           src={`/official-escape-time/assets/theme-img/thumb_${item.id}.jpg`}
