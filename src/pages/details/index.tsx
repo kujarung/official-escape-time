@@ -19,7 +19,13 @@ export const Details = () => {
       <Inner>
         <ImgContainer>
           <Image src={`/official-escape-time/assets/theme-img/thumb_${id}.jpg`} alt="" />
-          <IsHorror>공포 테마</IsHorror>
+          {item?.isHorror && (
+            <HorrorTextContainer>
+              <GenreTag color="danger" variant="solid">
+                공포
+              </GenreTag>
+            </HorrorTextContainer>
+          )}
         </ImgContainer>
         <Location>
           {item?.location} | {item?.branchName}
@@ -45,8 +51,11 @@ export const Details = () => {
           <InfoTitle>지점 이름 : {item?.branchName}</InfoTitle>
           <InfoTitle>전화 : {item?.branchTel}</InfoTitle>
 
-          <div className="" style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-            <Button onClick={() => window.open(`https://map.naver.com/v5/search/${item?.address}`, '_blank')}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+            <Button
+              style={{ fontFamily: 'Tenada', paddingBottom: 0 }}
+              onClick={() => window.open(`https://map.naver.com/v5/search/${item?.address}`, '_blank')}
+            >
               위치 보기
             </Button>
           </div>
@@ -54,13 +63,14 @@ export const Details = () => {
         <Divider />
         <ButtonContainer>
           <Space>
-            <Button type="primary">
+            <Button type="primary" style={{ fontFamily: 'Tenada', paddingBottom: 0 }}>
               <a href={`${item?.page}`} target="_blank">
                 홈페이지 가기
               </a>
             </Button>
 
             <Button
+              style={{ fontFamily: 'Tenada', paddingBottom: 0 }}
               onClick={() => {
                 setSelectedId(item?.id || '');
                 setIsVisible(true);
@@ -74,6 +84,23 @@ export const Details = () => {
     </Wrap>
   );
 };
+
+const GenreTag = styled(Button)`
+  pointer-events: none;
+  cursor: default;
+  opacity: 1 !important;
+  user-select: none;
+  border-radius: 0;
+  font-family: Tenada;
+  padding-bottom: 0;
+  &:hover,
+  &:focus,
+  &:active {
+    opacity: 1 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+`;
 
 const TitleContainer = styled.div`
   width: 100%;
@@ -101,16 +128,11 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const IsHorror = styled.div`
+const HorrorTextContainer = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 5px;
   padding-bottom: 0;
-  background-color: #ff1010;
-  color: #300000;
-  font-size: 12px;
-  line-height: 20px;
 `;
 
 const Wrap = styled.div`
@@ -129,7 +151,8 @@ const Inner = styled.div`
 const Location = styled.h4`
   font-size: 14px;
   line-height: 20px;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   color: #606060;
 `;
 

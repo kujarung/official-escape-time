@@ -44,6 +44,7 @@ const CardWrap = styled.section`
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
   text-decoration: none;
   transition: 0.3s ease;
+  cursor: pointer;
 
   margin-right: 10px;
   margin-left: 10px;
@@ -101,7 +102,7 @@ const InfoContainer = styled.div`
   padding-right: 20px;
   flex-wrap: wrap;
   box-sizing: border-box;
-  background: #d4a373;
+  background: rgb(22, 119, 255);
   padding-bottom: 10px;
   padding-top: 13px;
   border-bottom-left-radius: 10px;
