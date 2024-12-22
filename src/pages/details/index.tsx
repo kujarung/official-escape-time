@@ -1,15 +1,19 @@
 import { useParams } from 'react-router';
 import data from '../../assets/data/new-data.json';
 import styled from 'styled-components';
-import { Button, Space } from 'antd';
+import { Button, Divider, Space } from 'antd';
 import { useModalStore } from '../../store/modal-store';
+import { formatKoreanCurrency } from '../../utils';
+import { useEffect } from 'react';
 
 export const Details = () => {
   const { setIsVisible, setSelectedId } = useModalStore();
   const { id } = useParams();
   const item = data.find((i) => i.id === id);
 
-  console.log(item);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Wrap>
       <Inner>
@@ -21,16 +25,33 @@ export const Details = () => {
           {item?.location} | {item?.branchName}
         </Location>
         <TitleContainer>
-          <Title>
-            {item?.title} ({item?.playtime}분)
-          </Title>
+          <Title>{item?.title}</Title>
         </TitleContainer>
+
+        <Divider />
 
         <DescContainer>
           <DescTitle>시놉시스</DescTitle>
           <Description>{item?.description}</Description>
         </DescContainer>
 
+        <Divider />
+
+        <InfoContainer>
+          <DescTitle>기타 정보</DescTitle>
+          <InfoTitle>시간 : {item?.playtime}분</InfoTitle>
+          <InfoTitle>가격 : {formatKoreanCurrency(item?.price || 0)}</InfoTitle>
+          <InfoTitle>위치 : {item?.address}</InfoTitle>
+          <InfoTitle>지점 이름 : {item?.branchName}</InfoTitle>
+          <InfoTitle>전화 : {item?.branchTel}</InfoTitle>
+
+          <div className="" style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+            <Button onClick={() => window.open(`https://map.naver.com/v5/search/${item?.address}`, '_blank')}>
+              위치 보기
+            </Button>
+          </div>
+        </InfoContainer>
+        <Divider />
         <ButtonContainer>
           <Space>
             <Button type="primary">
@@ -56,8 +77,6 @@ export const Details = () => {
 
 const TitleContainer = styled.div`
   width: 100%;
-  border-bottom: 1px solid #d2d2d7;
-  margin-bottom: 20px;
 `;
 
 const Title = styled.h4`
@@ -87,8 +106,9 @@ const IsHorror = styled.div`
   bottom: 0;
   right: 0;
   padding: 5px;
-  background-color: #ff2121;
-  color: #720303;
+  padding-bottom: 0;
+  background-color: #ff1010;
+  color: #300000;
   font-size: 12px;
   line-height: 20px;
 `;
@@ -115,15 +135,13 @@ const Location = styled.h4`
 
 const DescContainer = styled.div`
   width: 100%;
-  border-bottom: 1px solid #d2d2d7;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
 `;
 
 const DescTitle = styled.h2`
   font-size: 24px;
+  line-height: 32px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const Description = styled.h3`
@@ -134,21 +152,15 @@ const Description = styled.h3`
   color: #6e6e73;
 `;
 
-const HomePageButton = styled.button`
-  background-color: #d4a373;
-  color: #fefae0;
-  border-radius: 10px;
-  font-size: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-`;
-
 const ButtonContainer = styled.div`
   padding-bottom: 20px;
+`;
+
+const InfoContainer = styled.div``;
+
+const InfoTitle = styled.h4`
+  font-size: 14px;
+  line-height: 18px;
+  color: #6e6e73;
+  text-align: center;
 `;
