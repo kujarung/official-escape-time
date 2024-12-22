@@ -26,7 +26,7 @@ export const DetailBottomSheet = ({
     >
       <ItemInner>
         <h2>{item.title}</h2>
-        <ItemImg src={`/assets/theme-img/thumb_${item.id}.jpg`} alt="" />
+        <ItemImg src={`/official-escape-time/assets/theme-img/thumb_${item.id}.jpg`} alt="" />
         <h2>{item.description}</h2>
         <ButtonContainer onClick={() => shareToKakao(item.id)}>
           <KakaoSharedButton>공유하기</KakaoSharedButton>

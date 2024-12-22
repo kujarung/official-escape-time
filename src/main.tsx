@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename={'/official-escape-time'}>
     <GlobalStyle />
     <Routes>
       <Route path="/" element={<App />} />
