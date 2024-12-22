@@ -14,8 +14,8 @@ export const useShareTheme = () => {
         description: 'Your Description', // 설명 설정
         imageUrl: 'https://example.com/your-image.jpg', // 공유할 이미지 URL
         link: {
-          mobileWebUrl: 'https://example.com',
-          webUrl: 'https://example.com',
+          mobileWebUrl: 'https://kujarung.github.io/official-escape-time/',
+          webUrl: 'https://kujarung.github.io/official-escape-time/',
         },
       },
       buttons: [
