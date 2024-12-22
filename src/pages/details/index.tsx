@@ -46,7 +46,7 @@ export const Details = () => {
         <InfoContainer>
           <DescTitle>기타 정보</DescTitle>
           <InfoTitle>시간 : {item?.playtime}분</InfoTitle>
-          <InfoTitle>가격 : {formatKoreanCurrency(item?.price || 0)}</InfoTitle>
+          <InfoTitle>1인 가격 : {formatKoreanCurrency(item?.price || 0)}</InfoTitle>
           <InfoTitle>위치 : {item?.address}</InfoTitle>
           <InfoTitle>지점 이름 : {item?.branchName}</InfoTitle>
           <InfoTitle>전화 : {item?.branchTel}</InfoTitle>
