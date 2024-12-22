@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <GlobalStyle />
     <Routes>
       <Route path="/" element={<App />} />
