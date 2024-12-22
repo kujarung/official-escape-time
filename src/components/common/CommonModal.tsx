@@ -1,19 +1,12 @@
 // components/DateTimeModal.tsx
 import { Modal, DatePicker, TimePicker, Button } from 'antd';
 import styled from 'styled-components';
-import type { Dayjs } from 'dayjs';
 import { useModalStore } from '../../store/modal-store';
 import { useShareTheme } from '../../hook/use-shared-theme';
 
 export const CommonModal = () => {
   const { shareToKakao } = useShareTheme();
-  const { isVisible, selectedDate, setIsVisible, setTime, selectedTime, selectedId } = useModalStore();
-
-  const handleDateChange = (date: Dayjs) => {
-    if (date) {
-      setTime(date);
-    }
-  };
+  const { isVisible, selectedDate, setDate, setIsVisible, setTime, selectedTime, selectedId } = useModalStore();
 
   const handleCancel = () => {
     setIsVisible(false);
@@ -43,12 +36,12 @@ export const CommonModal = () => {
       <ModalContent>
         <DatePickerWrapper>
           <label>날짜 선택</label>
-          <DatePicker value={selectedDate} inputReadOnly onChange={handleDateChange} format={'YYYY-MM-DD'} />
+          <DatePicker value={selectedDate} inputReadOnly onChange={setDate} format={'YYYY-MM-DD'} />
         </DatePickerWrapper>
 
         <TimePickerWrapper>
           <label>시간 선택</label>
-          <TimePicker inputReadOnly value={selectedTime} onChange={handleDateChange} format="HH:mm" minuteStep={5} />
+          <TimePicker inputReadOnly value={selectedTime} onChange={setTime} format="HH:mm" minuteStep={5} />
         </TimePickerWrapper>
       </ModalContent>
     </Modal>
